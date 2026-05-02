@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Risk Budgeting Tool (Options Trading)</title>
+<link rel="stylesheet" href="style.css">
+    <meta name="google-site-verification" content="PkLa_ViOo6FAHpvh8SacceMb95o9tePRdrqLNBz9X1M" />
+</head>
+<body>
+
+<h1>Risk Budgeting Tool (Options Trading)</h1>
+
+<p>Allocate capital efficiently across your options trades.</p>
+
+
+<label>Total Capital:</label><input id="capital" type="number">
+<label>Risk % per Trade:</label><input id="risk" type="number">
+<label>Number of Trades:</label><input id="trades" type="number">
+
+
+<button onclick="calc()">Calculate</button>
+
+<p id="result"></p>
+
+<canvas id="chart" width="500" height="300"></canvas>
+
+<script>
+function calc(){
+
+let capital=parseFloat(document.getElementById('capital').value)||0;
+let risk=parseFloat(document.getElementById('risk').value)||0;
+let trades=parseFloat(document.getElementById('trades').value)||1;
+let result = (capital*(risk/100))/trades;
+
+document.getElementById('result').innerText=result;
+
+// simple visualization
+let canvas=document.getElementById('chart');
+let ctx=canvas.getContext('2d');
+ctx.clearRect(0,0,500,300);
+ctx.beginPath();
+
+for(let x=0;x<500;x++){
+  let y=150 - (x/10);
+  if(x===0) ctx.moveTo(x,y);
+  else ctx.lineTo(x,y);
+}
+
+ctx.stroke();
+}
+</script>
+
+</body>
+</html>
